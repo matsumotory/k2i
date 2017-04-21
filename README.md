@@ -1,3 +1,3 @@
 # k2i
 
-Kernel Parameter Interface using HTTP/2
+Kernel Parameters Interface using HTTP/2
