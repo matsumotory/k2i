@@ -1,0 +1,7 @@
+[package]
+name = "ironer"
+version = "0.1.0"
+authors = ["MATSUMOTO Ryosuke <matsumoto_r@net.ist.i.kyoto-u.ac.jp>"]
+
+[dependencies]
+iron = "0.5.*"
