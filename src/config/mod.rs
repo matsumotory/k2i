@@ -24,4 +24,11 @@ impl ServerConfiguration {
     pub fn hostport(&mut self) -> String {
         format!("{}:{}", self.hostname, self.port)
     }
+
+    pub fn finalize(&self) -> ServerConfiguration {
+        ServerConfiguration {
+            hostname: self.hostname,
+            port: self.port,
+        }
+    }
 }

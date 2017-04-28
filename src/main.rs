@@ -13,10 +13,12 @@ fn main() {
         Ok(Response::with((status::Ok, response::hello())))
     }
 
-    let mut config = ServerConfiguration::new();
-
-    config.hostname("127.0.0.1").port(8000);
+    let mut config = ServerConfiguration::new()
+        .hostname("127.0.0.1")
+        .port(8000)
+        .finalize();
 
     let _server = Iron::new(hello_world).http(config.hostport()).unwrap();
+
     println!("On {}", config.hostport());
 }
