@@ -20,4 +20,3 @@ fn main() {
     let _server = Iron::new(hello_world).http(config.hostport()).unwrap();
     println!("On {}", config.hostport());
 }
-
