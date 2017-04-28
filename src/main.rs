@@ -4,13 +4,15 @@ use iron::prelude::*;
 use iron::status;
 
 mod hello;
+mod config;
 
 fn main() {
     fn hello_world(_: &mut Request) -> IronResult<Response> {
         Ok(Response::with((status::Ok, hello::hello())))
     }
 
-    let _server = Iron::new(hello_world).http("localhost:3000").unwrap();
-    println!("On 3000");
+    let mut config = config::ServerConfiguration::new();
+    let _server = Iron::new(hello_world).http(config.hostport()).unwrap();
+    println!("On {}", config.hostport());
 }
 
