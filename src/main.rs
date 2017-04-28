@@ -15,7 +15,7 @@ fn main() {
 
     let mut config = ServerConfiguration::new();
 
-    config.hostname("127.0.0.1".to_string()).port(8000);
+    config.hostname("127.0.0.1").port(8000);
 
     let _server = Iron::new(hello_world).http(config.hostport()).unwrap();
     println!("On {}", config.hostport());

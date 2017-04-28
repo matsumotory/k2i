@@ -1,17 +1,17 @@
 pub struct ServerConfiguration {
-  hostname: String,
+  hostname: &'static str,
   port: i32,
 }
 
 impl ServerConfiguration {
   pub fn new() -> ServerConfiguration {
     ServerConfiguration {
-      hostname: "127.0.0.1".to_string(),
+      hostname: "127.0.0.1",
       port: 3000,
     }
   }
 
-  pub fn hostname(&mut self, hostname: String) -> &mut ServerConfiguration {
+  pub fn hostname(&mut self, hostname: &'static str) -> &mut ServerConfiguration {
     self.hostname = hostname;
     self
   }
