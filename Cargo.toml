@@ -1,7 +1,7 @@
 [package]
 name = "k2i"
 version = "0.1.0"
-authors = ["MATSUMOTO Ryosuke <matsumoto_r@net.ist.i.kyoto-u.ac.jp>"]
+authors = ["MATSUMOTO Ryosuke <matsu1229@gmail.com>"]
 
 [dependencies]
 iron = "0.5.*"
