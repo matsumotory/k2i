@@ -21,7 +21,7 @@ impl ServerConfiguration {
         self
     }
 
-    pub fn hostport(&mut self) -> String {
+    pub fn hostport(&self) -> String {
         format!("{}:{}", self.hostname, self.port)
     }
 

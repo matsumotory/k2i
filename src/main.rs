@@ -13,7 +13,7 @@ fn main() {
         Ok(Response::with((status::Ok, response::hello())))
     }
 
-    let mut config = ServerConfiguration::new()
+    let config = ServerConfiguration::new()
         .hostname("127.0.0.1")
         .port(8000)
         .finalize();
