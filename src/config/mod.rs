@@ -1,6 +1,7 @@
 pub struct ServerConfiguration {
     hostname: &'static str,
     port: i32,
+    pub threads: usize,
 }
 
 impl ServerConfiguration {
@@ -8,6 +9,7 @@ impl ServerConfiguration {
         ServerConfiguration {
             hostname: "127.0.0.1",
             port: 3000,
+            threads: 1,
         }
     }
 
@@ -21,6 +23,11 @@ impl ServerConfiguration {
         self
     }
 
+    pub fn threads(&mut self, threads: usize) -> &mut ServerConfiguration {
+        self.threads = threads;
+        self
+    }
+
     pub fn hostport(&self) -> String {
         format!("{}:{}", self.hostname, self.port)
     }
@@ -29,6 +36,7 @@ impl ServerConfiguration {
         ServerConfiguration {
             hostname: self.hostname,
             port: self.port,
+            threads: self.threads,
         }
     }
 }
