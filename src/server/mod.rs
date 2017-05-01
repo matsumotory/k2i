@@ -15,9 +15,7 @@ pub struct K2I {
 
 impl K2I {
     pub fn new(config: ServerConfiguration) -> K2I {
-        K2I {
-            config: config,
-        }
+        K2I { config: config }
     }
 
     pub fn run(&self) {
@@ -30,7 +28,7 @@ impl K2I {
             write: Some(Duration::from_secs(10)),
         };
 
-        let _listening = server.http(self.config.hostport()).unwrap():
+        let _listening = server.http(self.config.hostport()).unwrap();
     }
 }
 
