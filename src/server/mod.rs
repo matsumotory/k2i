@@ -22,8 +22,14 @@ impl K2I {
 
     pub fn run(&self) {
         let mut router = Router::new();
+        let config_dump = self.config.dump();
+
+        // routing API
         router.get("/", root_response, "root");
         router.get("/hello", hello_response, "hello");
+        router.get("/config",
+                   move |_: &mut Request| Ok(Response::with((status::Ok, config_dump.as_str()))),
+                   "config");
 
         let mut server = Iron::new(router);
 

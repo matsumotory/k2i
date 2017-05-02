@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub struct ServerConfiguration {
     hostname: &'static str,
     port: i32,
@@ -38,5 +39,9 @@ impl ServerConfiguration {
             port: self.port,
             threads: self.threads,
         }
+    }
+
+    pub fn dump(&self) -> String {
+        format!("K2I configuration: {:?}", self)
     }
 }
