@@ -13,7 +13,6 @@ fn main() {
         .threads(4)
         .finalize();
 
-
     println!("On {}", config.hostport());
 
     let _server = K2I::new(config).run();
