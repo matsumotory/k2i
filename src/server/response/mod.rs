@@ -1,9 +1,9 @@
+// K2I system response
+
 pub fn hello() -> &'static str {
-    "mod hello world!"
+    "hello!"
 }
 
-pub mod sub_hello {
-    pub fn hello() -> &'static str {
-        "mod sub_hello world!"
-    }
+pub fn root() -> &'static str {
+    "root response!"
 }

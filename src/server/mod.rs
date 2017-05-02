@@ -4,6 +4,8 @@ use iron::prelude::*;
 use iron::status;
 use iron::Timeouts;
 
+use router::Router;
+
 mod response;
 pub mod config;
 
@@ -14,12 +16,16 @@ pub struct K2I {
 }
 
 impl K2I {
-    pub fn new(config: ServerConfiguration) -> K2I {
-        K2I { config: config }
+    pub fn new(c: ServerConfiguration) -> K2I {
+        K2I { config: c }
     }
 
     pub fn run(&self) {
-        let mut server = Iron::new(hello_world);
+        let mut router = Router::new();
+        router.get("/", root_response, "root");
+        router.get("/hello", hello_response, "hello");
+
+        let mut server = Iron::new(router);
 
         server.threads = self.config.threads;
         server.timeouts = Timeouts {
@@ -32,6 +38,10 @@ impl K2I {
     }
 }
 
-fn hello_world(_: &mut Request) -> IronResult<Response> {
+fn hello_response(_: &mut Request) -> IronResult<Response> {
     Ok(Response::with((status::Ok, response::hello())))
+}
+
+fn root_response(_: &mut Request) -> IronResult<Response> {
+    Ok(Response::with((status::Ok, response::root())))
 }

@@ -5,3 +5,4 @@ authors = ["MATSUMOTO Ryosuke <matsu1229@gmail.com>"]
 
 [dependencies]
 iron = "0.5.*"
+router = "*"
