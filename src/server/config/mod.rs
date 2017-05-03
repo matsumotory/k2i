@@ -1,6 +1,8 @@
-#[derive(Debug)]
+use rustc_serialize::json;
+
+#[derive(Debug, RustcDecodable, RustcEncodable)]
 pub struct ServerConfiguration {
-    hostname: &'static str,
+    hostname: String,
     port: i32,
     pub threads: usize,
 }
@@ -8,14 +10,14 @@ pub struct ServerConfiguration {
 impl ServerConfiguration {
     pub fn new() -> ServerConfiguration {
         ServerConfiguration {
-            hostname: "127.0.0.1",
+            hostname: "127.0.0.1".to_string(),
             port: 3000,
             threads: 1,
         }
     }
 
     pub fn hostname(&mut self, hostname: &'static str) -> &mut ServerConfiguration {
-        self.hostname = hostname;
+        self.hostname = hostname.to_string();
         self
     }
 
@@ -35,13 +37,13 @@ impl ServerConfiguration {
 
     pub fn finalize(&self) -> ServerConfiguration {
         ServerConfiguration {
-            hostname: self.hostname,
+            hostname: self.hostname.clone(),
             port: self.port,
             threads: self.threads,
         }
     }
 
     pub fn dump(&self) -> String {
-        format!("K2I configuration: {:?}", self)
+        json::encode(self).unwrap()
     }
 }

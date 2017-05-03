@@ -1,5 +1,6 @@
 extern crate iron;
 extern crate router;
+extern crate rustc_serialize;
 
 mod server;
 
