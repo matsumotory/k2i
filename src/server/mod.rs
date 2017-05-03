@@ -1,14 +1,14 @@
-use std::time::Duration;
-use std::ptr::null_mut;
-use std::ffi::CStr;
+use iron::Timeouts;
 
 use iron::prelude::*;
 use iron::status;
-use iron::Timeouts;
-use router::Router;
 use procps_sys;
 use procps_sys::readproc::{openproc, readproc, closeproc, proc_t};
+use router::Router;
 use rustc_serialize::json;
+use std::ffi::CStr;
+use std::ptr::null_mut;
+use std::time::Duration;
 
 mod response;
 pub mod config;
@@ -192,8 +192,7 @@ fn os_raw_cchar_to_string2(cchar: *mut ::std::os::raw::c_char) -> String {
 fn procps_response(_: &mut Request) -> IronResult<Response> {
     let mut procps_list = Vec::new();
     unsafe {
-        let proctab = openproc(procps_sys::readproc::PROC_FILLCOM |
-                               procps_sys::readproc::PROC_FILLSTAT |
+        let proctab = openproc(procps_sys::readproc::PROC_FILLCOM | procps_sys::readproc::PROC_FILLSTAT |
                                procps_sys::readproc::PROC_FILLMEM |
                                procps_sys::readproc::PROC_FILLARG |
                                procps_sys::readproc::PROC_FILLCGROUP);
