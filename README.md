@@ -18,9 +18,6 @@ k2i
 
 ```
 $ curl 127.0.0.1:8000/k2i/api/v1/proc | jq . | head -n 25
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100  145k  100  145k    0     0  21.8M      0 --:--:-- --:--:-- --:--:-- 23.6M
 [ 
   { 
     "tid": 1,
