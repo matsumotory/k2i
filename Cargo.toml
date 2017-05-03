@@ -2,9 +2,16 @@
 name = "k2i"
 version = "0.1.0"
 authors = ["MATSUMOTO Ryosuke <matsu1229@gmail.com>"]
+description = "Kernel Parameters Interface using HTTP"
+license = "MIT"
+repository = "https://github.com/matsumotory/k2i"
 
 [dependencies]
 iron = "0.5.*"
 router = "*"
 rustc-serialize = "*"
 procps-sys = "*"
+
+[[bin]]
+doc = false
+name = "k2i"
