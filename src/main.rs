@@ -13,7 +13,7 @@ fn main() {
     let config = ServerConfiguration::new()
         .hostname("127.0.0.1")
         .port(8000)
-        .threads(4)
+        .threads(1)
         .finalize();
 
     println!("On {}", config.hostport());
