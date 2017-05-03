@@ -7,10 +7,10 @@ license = "MIT"
 repository = "https://github.com/matsumotory/k2i"
 
 [dependencies]
-iron = "0.5.*"
-router = "*"
-rustc-serialize = "*"
-procps-sys = "*"
+iron = "0.5.1"
+router = "0.5.1"
+rustc-serialize = "0.3.24"
+procps-sys = "0.1.0"
 
 [[bin]]
 doc = false
