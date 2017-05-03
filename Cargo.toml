@@ -7,3 +7,4 @@ authors = ["MATSUMOTO Ryosuke <matsu1229@gmail.com>"]
 iron = "0.5.*"
 router = "*"
 rustc-serialize = "*"
+procps-sys = "*"
