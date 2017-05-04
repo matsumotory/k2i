@@ -8,7 +8,7 @@ Kernel Parameters Interface using HTTP
 cargo install k2i
 ```
 
-## Run
+## k2i Server Run
 
 ```
 k2i 
