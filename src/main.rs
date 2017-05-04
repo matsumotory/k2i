@@ -13,6 +13,7 @@ fn main() {
     let config = ServerConfiguration::new()
         .hostname("127.0.0.1")
         .port(8000)
+        // for now catch segfault procps-sys when multi-threading
         .threads(1)
         .finalize();
 
