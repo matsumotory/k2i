@@ -127,7 +127,7 @@ fn os_raw_cchar_to_string2(cchar: *mut ::std::os::raw::c_char) -> String {
     }
 }
 
-pub fn procps_json_encode(flags: ::std::os::raw::c_int, pid: ::std::os::raw::c_int) -> String {
+pub fn procps_json_encode(flags: ::std::os::raw::c_int, pid: &::std::os::raw::c_int) -> String {
     let mut procps_list = Vec::new();
 
     unsafe {
