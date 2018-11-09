@@ -1,4 +1,4 @@
-use procps_sys::readproc::{openproc, readproc, closeproc, proc_t};
+use procps_sys::readproc::{closeproc, openproc, proc_t, readproc};
 use rustc_serialize::json;
 use std::ffi::CStr;
 use std::ptr::null_mut;

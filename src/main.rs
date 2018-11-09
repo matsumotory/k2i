@@ -1,15 +1,14 @@
 extern crate iron;
+extern crate procps_sys;
 extern crate router;
 extern crate rustc_serialize;
-extern crate procps_sys;
 
 mod server;
 
-use server::K2I;
 use server::config::ServerConfiguration;
+use server::K2I;
 
 fn main() {
-
     let config = ServerConfiguration::new()
         .hostname("127.0.0.1")
         .port(8000)

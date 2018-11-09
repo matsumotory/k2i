@@ -7,8 +7,8 @@ use router::Router;
 use std::time::Duration;
 
 pub mod config;
-mod response;
 mod procps;
+mod response;
 
 use self::config::ServerConfiguration;
 use self::procps::*;
@@ -32,19 +32,26 @@ impl K2I {
 
         // routing API
         router.get(format!("{}{}", self.end_point, "/"), root_response, "root");
-        router.get(format!("{}{}", self.end_point, "/hello"),
-                   hello_response,
-                   "hello");
-        router.get(format!("{}{}", self.end_point, "/config"),
-                   move |_: &mut Request| Ok(Response::with((status::Ok, config_dump.as_str()))),
-                   "config");
-        router.get(format!("{}{}", self.end_point, "/proc"),
-                   procps_response,
-                   "procps");
-        router.get(format!("{}{}", self.end_point, "/proc/:pid"),
-                   procps_pid_response,
-                   "procps_pid");
-
+        router.get(
+            format!("{}{}", self.end_point, "/hello"),
+            hello_response,
+            "hello",
+        );
+        router.get(
+            format!("{}{}", self.end_point, "/config"),
+            move |_: &mut Request| Ok(Response::with((status::Ok, config_dump.as_str()))),
+            "config",
+        );
+        router.get(
+            format!("{}{}", self.end_point, "/proc"),
+            procps_response,
+            "procps",
+        );
+        router.get(
+            format!("{}{}", self.end_point, "/proc/:pid"),
+            procps_pid_response,
+            "procps_pid",
+        );
 
         let mut server = Iron::new(router);
 
@@ -69,23 +76,36 @@ fn root_response(_: &mut Request) -> IronResult<Response> {
 
 fn procps_response(_: &mut Request) -> IronResult<Response> {
     let ref pid = 0;
-    Ok(Response::with((status::Ok,
-                       procps_json_encode(readproc::PROC_FILLCOM | readproc::PROC_FILLSTAT | readproc::PROC_FILLMEM |
-                                          readproc::PROC_FILLARG |
-                                          readproc::PROC_FILLCGROUP,
-                                          pid))))
+    Ok(Response::with((
+        status::Ok,
+        procps_json_encode(
+            readproc::PROC_FILLCOM
+                | readproc::PROC_FILLSTAT
+                | readproc::PROC_FILLMEM
+                | readproc::PROC_FILLARG
+                | readproc::PROC_FILLCGROUP,
+            pid,
+        ),
+    )))
 }
 
 fn procps_pid_response(req: &mut Request) -> IronResult<Response> {
-    let ref pid = req.extensions
-                     .get::<Router>()
-                     .unwrap()
-                     .find("pid")
-                     .unwrap_or("/");
-    Ok(Response::with((status::Ok,
-                       procps_json_encode(readproc::PROC_FILLCOM | readproc::PROC_FILLSTAT | readproc::PROC_FILLMEM |
-                                          readproc::PROC_FILLARG |
-                                          readproc::PROC_FILLCGROUP |
-                                          readproc::PROC_PID,
-                                          &pid.parse::<i32>().unwrap()))))
+    let ref pid = req
+        .extensions
+        .get::<Router>()
+        .unwrap()
+        .find("pid")
+        .unwrap_or("/");
+    Ok(Response::with((
+        status::Ok,
+        procps_json_encode(
+            readproc::PROC_FILLCOM
+                | readproc::PROC_FILLSTAT
+                | readproc::PROC_FILLMEM
+                | readproc::PROC_FILLARG
+                | readproc::PROC_FILLCGROUP
+                | readproc::PROC_PID,
+            &pid.parse::<i32>().unwrap(),
+        ),
+    )))
 }
