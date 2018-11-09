@@ -11,6 +11,7 @@ source $HOME/.cargo/env
 rustup update
 rustup install nightly
 rustup component add rustfmt-preview --toolchain nightly
+rustup default nightly
 
 git clone https://github.com/matsumotory/k2i
 cd k2i && cargo build
