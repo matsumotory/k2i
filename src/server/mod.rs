@@ -22,7 +22,7 @@ impl K2I {
     pub fn new(c: ServerConfiguration) -> K2I {
         K2I {
             config: c,
-            end_point: "/k2i/api/v1",
+            end_point: "/v1",
         }
     }
 
