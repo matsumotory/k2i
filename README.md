@@ -19,20 +19,20 @@ k2i
 - root response
 
 ```
-$ curl 127.0.0.1:8000/k2i/api/v1/
+$ curl 127.0.0.1:8000/v1/
 root response!
 ```
 
 - test response
 
 ```
-$ curl 127.0.0.1:8000/k2i/api/v1/hello
+$ curl 127.0.0.1:8000/v1/hello
 hello!
 ```
 - current configuration response
 
 ```
-$ curl -s 127.0.0.1:8000/k2i/api/v1/config | jq .
+$ curl -s 127.0.0.1:8000/v1/config | jq .
 {
   "hostname": "127.0.0.1",
   "port": 8000,
@@ -43,7 +43,7 @@ $ curl -s 127.0.0.1:8000/k2i/api/v1/config | jq .
 - all proc information response
 
 ```
-$ curl -s 127.0.0.1:8000/k2i/api/v1/proc | jq . | head -n 30
+$ curl -s 127.0.0.1:8000/v1/proc | jq . | head -n 30
 [
   {
     "tid": 1,
@@ -83,7 +83,7 @@ $ curl -s 127.0.0.1:8000/k2i/api/v1/proc | jq . | head -n 30
 - Specified PID proc information response
 
 ```
-$ curl -s 127.0.0.1:8000/k2i/api/v1/proc/19309 | jq . | head -n 30
+$ curl -s 127.0.0.1:8000/v1/proc/19309 | jq . | head -n 30
 [
   {
     "tid": 19309,
@@ -124,7 +124,7 @@ $ curl -s 127.0.0.1:8000/k2i/api/v1/proc/19309 | jq . | head -n 30
 ## HTTP request to k2i
 
 ```
-$ curl 127.0.0.1:8000/k2i/api/v1/proc | jq . | head -n 25
+$ curl 127.0.0.1:8000/v1/proc | jq . | head -n 25
 [ 
   { 
     "tid": 1,
