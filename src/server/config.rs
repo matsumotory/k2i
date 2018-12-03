@@ -31,6 +31,11 @@ impl ServerConfiguration {
         self
     }
 
+    pub fn threads_auto(&mut self) -> &mut ServerConfiguration {
+        self.threads(num_cpus::get());
+        self
+    }
+
     pub fn hostport(&self) -> String {
         format!("{}:{}", self.hostname, self.port)
     }

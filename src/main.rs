@@ -2,6 +2,7 @@ extern crate iron;
 extern crate procps_sys;
 extern crate router;
 extern crate rustc_serialize;
+extern crate num_cpus;
 
 mod server;
 
@@ -13,7 +14,7 @@ fn main() {
         .hostname("127.0.0.1")
         .port(8000)
         // for now catch segfault procps-sys when multi-threading
-        .threads(1)
+        .threads_auto()
         .finalize();
 
     println!("On {}", config.hostport());

@@ -11,6 +11,7 @@ iron = "0.5.1"
 router = "0.5.1"
 rustc-serialize = "0.3.24"
 procps-sys = "0.1.0"
+num_cpus = "1.0"
 
 [[bin]]
 doc = false
