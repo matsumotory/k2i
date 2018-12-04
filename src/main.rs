@@ -1,8 +1,8 @@
 extern crate iron;
+extern crate num_cpus;
 extern crate procps_sys;
 extern crate router;
 extern crate rustc_serialize;
-extern crate num_cpus;
 
 mod server;
 

@@ -60,8 +60,8 @@ struct ProcpsElem {
     cmin_flt: c_ulong,
     cmaj_flt: c_ulong,
     environ: String,
-    cmdline: String,
-    cgroup: String,
+    cmdline: Vec<String>,
+    cgroup: Vec<String>,
     supgid: String,
     supgrp: String,
     euser: String,
@@ -94,13 +94,52 @@ struct ProcpsElem {
     ns: [c_long; 6usize],
 }
 
+fn os_raw_cchar_to_vec(cchar: *mut *mut c_char) -> Vec<String> {
+    unsafe {
+        let mut optional = Some(1);
+        let mut vec = Vec::new();
+
+        if !cchar.is_null() {
+            while let Some(i) = optional {
+                if !(*cchar.offset(i)).is_null() {
+                    let mut s = CStr::from_ptr(*cchar.offset(i)).to_string_lossy().into_owned();
+                    if !s.is_empty() {
+                        vec.push(s);
+                    }
+                    optional = Some(i + 1);
+                } else {
+                    optional = None;
+                }
+            }
+        }
+        vec
+    }
+}
+
 fn os_raw_cchar_to_string(cchar: *mut *mut c_char) -> String {
     unsafe {
-        if !cchar.is_null() && !(*cchar).is_null() {
-            CStr::from_ptr(*cchar).to_string_lossy().into_owned()
-        } else {
-            "".to_string()
+        let mut optional = Some(1);
+        let mut char_string = "".to_string();
+
+        while let Some(i) = optional {
+            if !cchar.is_null() {
+                if !(*cchar.offset(i)).is_null() {
+                    char_string = format!(
+                        "{}{}",
+                        char_string,
+                        CStr::from_ptr(*cchar.offset(i))
+                            .to_string_lossy()
+                            .into_owned()
+                    );
+                    optional = Some(i + 1);
+                } else {
+                    optional = None;
+                }
+            } else {
+                optional = None;
+            }
         }
+        char_string
     }
 }
 
@@ -190,8 +229,8 @@ pub fn procps_json_encode(flags: c_int, pid: &c_int) -> String {
                     cmin_flt: (*procinfo).cmin_flt,
                     cmaj_flt: (*procinfo).cmaj_flt,
                     environ: os_raw_cchar_to_string((*procinfo).environ),
-                    cmdline: os_raw_cchar_to_string((*procinfo).cmdline),
-                    cgroup: os_raw_cchar_to_string((*procinfo).cgroup),
+                    cmdline: os_raw_cchar_to_vec((*procinfo).cmdline),
+                    cgroup: os_raw_cchar_to_vec((*procinfo).cgroup),
                     supgid: os_raw_cchar_to_string2((*procinfo).supgid),
                     supgrp: os_raw_cchar_to_string2((*procinfo).supgrp),
                     euser: os_raw_cchar_to_string3((*procinfo).euser.as_ptr()),
