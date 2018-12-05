@@ -86,7 +86,7 @@ dependencies = [
 
 [[package]]
 name = "k2i"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "iron 0.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "num_cpus 1.8.0 (registry+https://github.com/rust-lang/crates.io-index)",
