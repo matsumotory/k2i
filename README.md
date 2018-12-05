@@ -78,6 +78,40 @@ $ curl -s 127.0.0.1:8000/v1/proc | jq . | head -n 30
 .
 (snip)
 .
+    "vsize": 38801408,
+    "rss_rlim": 18446744073709552000,
+    "flags": 4194560,
+    "min_flt": 9842,
+    "maj_flt": 142,
+    "cmin_flt": 3321118,
+    "cmaj_flt": 1580,
+    "environ": "",
+    "cmdline": [],
+    "cgroup": [
+      "10:perf_event:/",
+      "9:cpuset:/",
+      "8:blkio:/init.scope",
+      "7:net_cls,net_prio:/",
+      "6:cpu,cpuacct:/init.scope",
+      "5:pids:/init.scope",
+      "4:hugetlb:/",
+      "3:memory:/init.scope",
+      "2:devices:/init.scope",
+      "1:name=systemd:/init.scope"
+    ],
+    "supgid": "",
+    "supgrp": "",
+    "euser": "",
+    "ruser": "",
+    "suser": "",
+    "fuser": "",
+    "rgroup": "",
+    "egroup": "",
+    "sgroup": "",
+    "fgroup": "",
+    "cmd": "systemd",
+    "pgrp": 1,
+
 ```
 
 - Specified PID proc information response
