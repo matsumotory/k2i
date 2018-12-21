@@ -78,7 +78,7 @@ fn procps_response(_: &mut Request) -> IronResult<Response> {
     let ref pid = 0;
     Ok(Response::with((
         status::Ok,
-        procps_json_encode(
+        procps_list_json(
             readproc::PROC_FILLCOM
                 | readproc::PROC_FILLSTAT
                 | readproc::PROC_FILLMEM
@@ -98,7 +98,7 @@ fn procps_pid_response(req: &mut Request) -> IronResult<Response> {
         .unwrap_or("/");
     Ok(Response::with((
         status::Ok,
-        procps_json_encode(
+        procps_list_json(
             readproc::PROC_FILLCOM
                 | readproc::PROC_FILLSTAT
                 | readproc::PROC_FILLMEM

@@ -165,7 +165,7 @@ fn os_raw_cchar_to_string3(cchar: *const c_char) -> String {
     }
 }
 
-pub fn procps_json_encode(flags: c_int, pid: &c_int) -> String {
+pub fn procps_list(flags: c_int, pid: &c_int) -> Vec<ProcpsElem> {
     let mut procps_list = Vec::new();
 
     unsafe {
@@ -184,8 +184,16 @@ pub fn procps_json_encode(flags: c_int, pid: &c_int) -> String {
         }
         closeproc(proctab);
     }
+    procps_list
+}
 
-    json::encode(&procps_list).unwrap()
+pub fn procps_list_json(flags: c_int, pid: &c_int) -> String {
+    let procps_list = procps_list(flags, pid);
+    procps_json_encode(procps_list)
+}
+
+pub fn procps_json_encode(p: Vec<ProcpsElem>) -> String {
+    json::encode(&p).unwrap()
 }
 
 pub fn procps_element(procinfo: *mut proc_t) -> ProcpsElem {
