@@ -258,8 +258,6 @@ pub fn procps_element(procinfo: *mut proc_t) -> ProcpsElem {
             sgroup: os_raw_cchar_to_string3((*procinfo).sgroup.as_ptr()),
             fgroup: os_raw_cchar_to_string3((*procinfo).fgroup.as_ptr()),
             cmd: os_raw_cchar_to_string3((*procinfo).cmd.as_ptr()),
-            //ring: (*procinfo).ring,
-            //next: (*procinfo).next,
             pgrp: (*procinfo).pgrp,
             session: (*procinfo).session,
             nlwp: (*procinfo).nlwp,
