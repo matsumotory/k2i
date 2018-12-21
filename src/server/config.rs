@@ -52,7 +52,10 @@ impl ServerConfiguration {
     }
 
     pub fn tls_cert_key(&mut self, cert: PathBuf, key: PathBuf) -> &mut ServerConfiguration {
-        let tls = Some(TLSConfiguration{ cert: cert, key: key });
+        let tls = Some(TLSConfiguration {
+            cert: cert,
+            key: key,
+        });
         self.https = true;
         self.tls = tls;
         self

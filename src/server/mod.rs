@@ -78,7 +78,9 @@ impl K2I {
         };
 
         if let Some(ref tls) = self.config.tls {
-            let _listening = server.https(self.config.hostport(), tls.cert, tls.key).unwrap();
+            let _listening = server
+                .https(self.config.hostport(), tls.cert, tls.key)
+                .unwrap();
         } else {
             let _listening = server.http(self.config.hostport()).unwrap();
         }
