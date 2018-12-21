@@ -48,9 +48,14 @@ impl K2I {
             "procps",
         );
         router.get(
-            format!("{}{}", self.end_point, "/proc/:pid"),
+            format!("{}{}", self.end_point, "/proc/pid/:pid"),
             procps_pid_response,
             "procps_pid",
+        );
+        router.get(
+            format!("{}{}", self.end_point, "/proc/cmd/:cmd"),
+            procps_cmd_response,
+            "procps_cmd",
         );
 
         let mut server = Iron::new(router);
@@ -76,6 +81,7 @@ fn root_response(_: &mut Request) -> IronResult<Response> {
 
 fn procps_response(_: &mut Request) -> IronResult<Response> {
     let ref pid = 0;
+
     Ok(Response::with((
         status::Ok,
         procps_list_json(
@@ -96,6 +102,7 @@ fn procps_pid_response(req: &mut Request) -> IronResult<Response> {
         .unwrap()
         .find("pid")
         .unwrap_or("/");
+
     Ok(Response::with((
         status::Ok,
         procps_list_json(
@@ -106,6 +113,29 @@ fn procps_pid_response(req: &mut Request) -> IronResult<Response> {
                 | readproc::PROC_FILLCGROUP
                 | readproc::PROC_PID,
             &pid.parse::<i32>().unwrap(),
+        ),
+    )))
+}
+
+fn procps_cmd_response(req: &mut Request) -> IronResult<Response> {
+    let ref pid = 0;
+    let ref cmd = req
+        .extensions
+        .get::<Router>()
+        .unwrap()
+        .find("cmd")
+        .unwrap_or("/");
+
+    Ok(Response::with((
+        status::Ok,
+        procps_cmd_match_list_json(
+            readproc::PROC_FILLCOM
+                | readproc::PROC_FILLSTAT
+                | readproc::PROC_FILLMEM
+                | readproc::PROC_FILLARG
+                | readproc::PROC_FILLCGROUP,
+            pid,
+            *cmd,
         ),
     )))
 }

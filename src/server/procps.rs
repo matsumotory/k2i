@@ -154,7 +154,6 @@ fn os_raw_cchar_to_string2(cchar: *mut c_char) -> String {
         }
     }
 }
-
 fn os_raw_cchar_to_string3(cchar: *const c_char) -> String {
     unsafe {
         if cchar == null_mut() {
@@ -165,8 +164,43 @@ fn os_raw_cchar_to_string3(cchar: *const c_char) -> String {
     }
 }
 
+pub fn procps_cmd_match_list(flags: c_int, pid: &c_int, cmd: &str) -> Vec<ProcpsElem> {
+    let mut procps_list = Vec::new();
+
+    println!("call procps_cmd_match_list: {} : {} : {}", flags, cmd, pid);
+
+    unsafe {
+        let proctab = openproc(flags, pid);
+        let mut optional = Some(readproc(proctab, null_mut()));
+
+        while let Some(procinfo) = optional {
+            if (procinfo).is_null() {
+                optional = None;
+            } else {
+                let procps_elem = procps_element(procinfo);
+
+                println!("match cmd! {}:{}", procps_elem.cmd, cmd);
+
+                if procps_elem.cmd.contains(cmd) {
+                    procps_list.push(procps_elem);
+                }
+                optional = Some(readproc(proctab, null_mut()));
+            }
+        }
+        closeproc(proctab);
+    }
+    procps_list
+}
+
+pub fn procps_cmd_match_list_json(flags: c_int, pid: &c_int, cmd: &str) -> String {
+    let procps_list = procps_cmd_match_list(flags, pid, cmd);
+    procps_json_encode(procps_list)
+}
+
 pub fn procps_list(flags: c_int, pid: &c_int) -> Vec<ProcpsElem> {
     let mut procps_list = Vec::new();
+
+    println!("call procps_list: {} : {}", flags, pid);
 
     unsafe {
         let proctab = openproc(flags, pid);
