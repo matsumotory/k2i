@@ -57,6 +57,16 @@ impl K2I {
             procps_cmd_response,
             "procps_cmd",
         );
+        router.get(
+            format!("{}{}", self.end_point, "/proc/self"),
+            procps_self_response,
+            "procps_self",
+        );
+        router.get(
+            format!("{}{}", self.end_point, "/k2i"),
+            procps_self_response,
+            "procps_k2i",
+        );
 
         let mut server = Iron::new(router);
 
@@ -138,4 +148,8 @@ fn procps_cmd_response(req: &mut Request) -> IronResult<Response> {
             *cmd,
         ),
     )))
+}
+
+fn procps_self_response(_: &mut Request) -> IronResult<Response> {
+    Ok(Response::with((status::Ok, procps_self_json())))
 }

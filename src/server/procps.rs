@@ -226,6 +226,22 @@ pub fn procps_list_json(flags: c_int, pid: &c_int) -> String {
     procps_json_encode(procps_list)
 }
 
+pub fn procps_self() -> Vec<ProcpsElem> {
+    let mut procps_list = Vec::new();
+
+    unsafe {
+        let mut procinfo = proc_t::default();
+        look_up_our_self(&mut procinfo);
+        procps_list.push(procps_element(&mut procinfo));
+    }
+    procps_list
+}
+
+pub fn procps_self_json() -> String {
+    let procps_list = procps_self();
+    procps_json_encode(procps_list)
+}
+
 pub fn procps_json_encode(p: Vec<ProcpsElem>) -> String {
     json::encode(&p).unwrap()
 }
