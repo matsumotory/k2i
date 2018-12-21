@@ -96,7 +96,7 @@ struct ProcpsElem {
 
 fn os_raw_cchar_to_vec(cchar: *mut *mut c_char) -> Vec<String> {
     unsafe {
-        let mut optional = Some(1);
+        let mut optional = Some(0);
         let mut vec = Vec::new();
 
         if !cchar.is_null() {
