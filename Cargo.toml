@@ -1,6 +1,6 @@
 [package]
 name = "k2i"
-version = "0.1.6"
+version = "0.2.0"
 authors = ["MATSUMOTO Ryosuke <matsu1229@gmail.com>"]
 description = "Kernel Parameters Interface using HTTP"
 license = "MIT"
