@@ -16,14 +16,21 @@ k2i
 
 ## Support API
 
-- root response
+### k2i information response
+
+```json
+$ curl 127.0.0.1:8000/v1/proc/self
+[{"tid":0,"ppid":5294,"maj_delta":0,"min_delta":0,"pcpu":0,"state":83,"pad_1":0,"pad_2":0,"pad_3":0,"utime":3,"stime":1,"cutime":0,"cstime":0,"start_time":9479566,"signal":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"blocked":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"sigignore":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"sigcatch":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"_sigpnd":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"start_code":94062006767616,"end_code":94062010354808,"start_stack":140724759217040,"kstk_esp":140724759213088,"kstk_eip":140628670241165,"wchan":0,"priority":20,"nice":0,"rss":484,"alarm":0,"size":0,"resident":0,"share":0,"trs":0,"lrs":0,"drs":0,"dt":0,"vm_size":0,"vm_lock":0,"vm_rss":0,"vm_data":0,"vm_stack":0,"vm_swap":0,"vm_exe":0,"vm_lib":0,"rtprio":0,"sched":0,"vsize":239472640,"rss_rlim":18446744073709551615,"flags":1077936128,"min_flt":2945,"maj_flt":2,"cmin_flt":0,"cmaj_flt":0,"environ":"","cmdline":[],"cgroup":[],"supgid":"","supgrp":"","euser":"","ruser":"","suser":"","fuser":"","rgroup":"","egroup":"","sgroup":"","fgroup":"","cmd":"k2i","pgrp":5507,"session":5294,"nlwp":4,"tgid":0,"tty":34816,"euid":0,"egid":0,"ruid":0,"rgid":0,"suid":0,"sgid":0,"fuid":0,"fgid":0,"tpgid":5507,"exit_signal":17,"processor":0,"ns":[0,0,0,0,0,0]}]
+```
+
+### root response
 
 ```
 $ curl 127.0.0.1:8000/v1/
 root response!
 ```
 
-- test response
+### test response
 
 ```
 $ curl 127.0.0.1:8000/v1/hello
@@ -40,9 +47,9 @@ $ curl -s 127.0.0.1:8000/v1/config | jq .
 }
 ```
 
-- all proc information response
+### all proc information response
 
-```
+```json
 $ curl -s 127.0.0.1:8000/v1/proc | jq . | head -n 30
 [
   {
@@ -114,9 +121,9 @@ $ curl -s 127.0.0.1:8000/v1/proc | jq . | head -n 30
 
 ```
 
-- Specified PID proc information response
+### Specified PID proc information response
 
-```
+```json
 $ curl -s 127.0.0.1:8000/v1/proc/19309 | jq . | head -n 30
 [
   {
@@ -154,36 +161,58 @@ $ curl -s 127.0.0.1:8000/v1/proc/19309 | jq . | head -n 30
 .
 ```
 
-
-## HTTP request to k2i
+### - Specified cmd name proc information response
 
 ```
-$ curl 127.0.0.1:8000/v1/proc | jq . | head -n 25
-[ 
-  { 
-    "tid": 1,
-    "ppid": 0,
-    "maj_delta": 0,
-    "min_delta": 0,
-    "pcpu": 0,
-    "state": 83,
-    "pad_1": 0,
-    "pad_2": 0,
-    "pad_3": 0,
-    "utime": 107,
-    "stime": 1498,
-    "cutime": 11285,
-    "cstime": 1529,
-    "start_time": 12,
-    "signal": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
+$ curl 127.0.0.1:8000/v1/proc/cmd/lxc | jq .
+(snip)
+
+    "rtprio": 0,
+    "sched": 0,
+    "vsize": 468344832,
+    "rss_rlim": 18446744073709552000,
+    "flags": 1077936384,
+    "min_flt": 555,
+    "maj_flt": 5,
+    "cmin_flt": 33,
+    "cmaj_flt": 0,
+    "environ": "",
+    "cmdline": [
+      "/usr/bin/lxcfs",
+      "/var/lib/lxcfs/"
+    ],
+    "cgroup": [
+      "11:cpuset:/",
+      "10:net_cls,net_prio:/",
+      "9:hugetlb:/",
+      "8:devices:/system.slice/lxcfs.service",
+      "7:perf_event:/",
+      "6:memory:/system.slice/lxcfs.service",
+      "5:blkio:/system.slice/lxcfs.service",
+      "4:pids:/system.slice/lxcfs.service",
+      "3:cpu,cpuacct:/system.slice/lxcfs.service",
+      "2:freezer:/",
+      "1:name=systemd:/system.slice/lxcfs.service"
+    ],
+    (snip)
+
+    "cmd": "lxcfs",
+    "pgrp": 756,
+    "session": 756,
+    "nlwp": 7,
+    "tgid": 756,
+    "tty": 0,
+    "euid": 0,
+    "egid": 0,
+    "ruid": 0,
+    "rgid": 0,
+    "suid": 0,
+    "sgid": 0,
+    "fuid": 0,
+    "fgid": 0,
+    "tpgid": -1,
+    "exit_signal": 17,
+(snip)
 ```
 
 # License
