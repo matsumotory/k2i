@@ -14,7 +14,8 @@ fn main() {
         .hostname("127.0.0.1")
         .port(8000)
         // for now catch segfault procps-sys when multi-threading
-        .threads_auto()
+        //.threads_auto()
+        .threads(1)
         .finalize();
 
     println!("On {}", config.hostport());
