@@ -1,6 +1,6 @@
 # k2i
 
-Kernel Parameters Interface using HTTP
+Kernel Parameters Interface using HTTP(S)
 
 ## Quick Install
 
@@ -81,10 +81,9 @@ $ curl -s 127.0.0.1:8000/v1/proc | jq . | head -n 30
       0,
       0,
       0,
-.
-.
+
 (snip)
-.
+
     "vsize": 38801408,
     "rss_rlim": 18446744073709552000,
     "flags": 4194560,
@@ -118,7 +117,7 @@ $ curl -s 127.0.0.1:8000/v1/proc | jq . | head -n 30
     "fgroup": "",
     "cmd": "systemd",
     "pgrp": 1,
-
+(snip)
 ```
 
 ### Specified PID proc information response
@@ -155,10 +154,7 @@ $ curl -s 127.0.0.1:8000/v1/proc/19309 | jq . | head -n 30
       0,
       0,
       0,
-.
-.
 (snip)
-.
 ```
 
 ### Specified cmd name proc information response
@@ -212,7 +208,7 @@ $ curl 127.0.0.1:8000/v1/proc/cmd/lxc | jq .
       "1:name=systemd:/system.slice/lxcfs.service"
     ],
 
-    (snip)
+(snip)
 
     "cmd": "lxcfs",
     "pgrp": 756,
@@ -230,7 +226,9 @@ $ curl 127.0.0.1:8000/v1/proc/cmd/lxc | jq .
     "fgid": 0,
     "tpgid": -1,
     "exit_signal": 17,
+
 (snip)
+
 ```
 
 # License
