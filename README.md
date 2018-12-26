@@ -68,20 +68,6 @@ $ curl -s 127.0.0.1:8000/v1/proc | jq . | head -n 30
     "cutime": 63742,
     "cstime": 4669,
     "start_time": 12,
-    "signal": [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
 
 (snip)
 
