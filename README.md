@@ -38,7 +38,7 @@ hello!
 ```
 - current configuration response
 
-```
+```json
 $ curl -s 127.0.0.1:8000/v1/config | jq .
 {
   "hostname": "127.0.0.1",
@@ -161,10 +161,27 @@ $ curl -s 127.0.0.1:8000/v1/proc/19309 | jq . | head -n 30
 .
 ```
 
-### - Specified cmd name proc information response
+### Specified cmd name proc information response
 
-```
+```json
 $ curl 127.0.0.1:8000/v1/proc/cmd/lxc | jq .
+[
+  {
+    "tid": 756,
+    "ppid": 1,
+    "maj_delta": 0,
+    "min_delta": 0,
+    "pcpu": 0,
+    "state": 83,
+    "pad_1": 0,
+    "pad_2": 0,
+    "pad_3": 0,
+    "utime": 12,
+    "stime": 41,
+    "cutime": 0,
+    "cstime": 0,
+    "start_time": 861,
+
 (snip)
 
     "rtprio": 0,
@@ -194,6 +211,7 @@ $ curl 127.0.0.1:8000/v1/proc/cmd/lxc | jq .
       "2:freezer:/",
       "1:name=systemd:/system.slice/lxcfs.service"
     ],
+
     (snip)
 
     "cmd": "lxcfs",
