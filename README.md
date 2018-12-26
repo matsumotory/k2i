@@ -1,4 +1,4 @@
-# k2i
+# k2i ![crates.io](https://img.shields.io/crates/v/k2i.svg)
 
 Kernel Parameters Interface using HTTP(S)
 
