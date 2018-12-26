@@ -1,4 +1,5 @@
-# k2i ![crates.io](https://img.shields.io/crates/v/k2i.svg)
+# k2i ![crates.io](https://img.shields.io/crates/v/k2i.svg) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/matsumotory/k2i/master/LICENSE)
+
 
 Kernel Parameters Interface using HTTP(S)
 
